@@ -3,8 +3,12 @@ FROM ubuntu:20.04
 WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
 
-RUN apt-get -qq update
-RUN apt-get -qq install -y git python3 python3-pip \
+RUN apt-get -qq update -y 
+RUN apt-get clean && \
+    apt-get -y update && \
+    apt-get install -y locales && \
+    locale-gen en_US.UTF-8
+RUN apt-get -qq install -y DEBIAN_FRONTEND=noninteractive git python3 python3-pip \
     locales python3-lxml aria2 \
     curl pv jq nginx npm
     
